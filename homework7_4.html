@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+    <body>
+        <canvas id="myCanvas" width="400" height="400" style="border:1px solid black;">
+
+        <script>
+        var canvas = document.getElementById('myCanvas');
+        var context = canvas.getContext('2d');
+        var line = 10
+
+        for (var i = 10; i < 200;) {
+            context.beginPath();
+            context.arc(200, 200 ,i,0,2*Math.PI);
+            context.lineWidth = line-0.5;
+            context.stroke();
+            line = line-0.5;
+            i += 10;
+        }
+
+        </script>
+
+    </body>
+</html>      

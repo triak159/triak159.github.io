@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+    <body>
+        <canvas id="myCanvas" width="400" height="400" style="border:1px solid black;">
+        <script>
+        var canvas = document.getElementById('myCanvas');
+        var context = canvas.getContext('2d');
+
+        context.beginPath();
+        for (var i = 10; i < 400;) {
+            context.moveTo(i, 0);
+            context.lineTo(i, 400);
+            context.moveTo(0,i);
+            context.lineTo(400,i);
+            context.lineWidth = 1;
+            i += 10;
+        }
+        context.strokeStyle = 'blue';
+        context.stroke();
+        </script>
+    </body>
+</html>      
