@@ -1,0 +1,158 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>입장</title>
+
+        <style>
+            table, th, td {
+              border: 1px solid black;
+              border-collapse: collapse;
+            }
+        </style>
+
+        <script>
+            function printTime() {
+                var clock = document.getElementById("clock");            // 출력할 장소 선택
+                var now = new Date();                                    // 현재시간
+                var nowTime = now.getFullYear() + "년" + " " + (now.getMonth()+1) + "월" + now.getDate() + "일"+ " " + now.getHours() + "시" + now.getMinutes() + "분" + now.getSeconds() + "초";
+                clock.innerHTML = nowTime;           // 현재시간 출력
+                setTimeout("printTime()",1000);
+            }
+            window.onload = function() {
+                printTime();
+            } // 함수실행
+            function inNumber(){
+                if(event.keyCode<48 || event.keyCode>57) {
+                event.returnValue=false;
+                } // 숫자 구별
+            }
+        </script>
+    </head>
+
+    <body>
+        <center>
+        <label for="name">고객성명</label>
+        <input type="text" id="name" >
+        <button type="button" onclick="getValueInput()"> 계산 </button> <br>
+        현재시간은 <span id="clock"></span> 입니다.<br> 
+        </center>
+        <br>
+            <center>
+            <table width="50%" height=100>
+                <thead>
+                    <tr>
+                        <th colspan = "3">구분</th>
+                        <th>선택</th>
+                        <th colspan = "4">어린이</th>
+                        <th>선택</th>
+                        <th colspan = "4">어른</th>
+                        <th colspan = "3">비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan = "3">입장권</th>
+                        <th><input type="checkbox" name="entrance1" value="어린이입장권"/></th>
+                        <th colspan = "2">7,000</th>
+                        <th colspan = "2">
+                            <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="1" id = "child1" value=0> 
+                        </th>
+                        <th><input type="checkbox" name="entrance2" value="어른입장권"/></th>
+                        <th colspan = "2">10,000</th>
+                        <th colspan = "2">
+                            <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="1" id = "adult1" value=0>
+                        </th>
+                        <th colspan = "3">입장</th>
+                    </tr>
+                    <tr>
+                        <th colspan = "3">BIG3</th>
+                        <th><input type="checkbox" name="entrance1" value="어린이BIG3"/></th>
+                        <th colspan = "2">12,000</th>
+                        <th colspan = "2">
+                            <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="1" id = "child2" value=0>
+                        </th>
+                        <th><input type="checkbox" name="entrance2" value="어른BIG3"/></th>
+                        <th colspan = "2">16,000</th>
+                        <th colspan = "2">
+                            <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="1" id = "adult2" value=0>
+                        </th>
+                        <th colspan = "3">입장+놀이3종</th>
+                    </tr>
+                    <tr>
+                        <th colspan = "3">자유이용권</th>
+                        <th><input type="checkbox" name="entrance1" value="어린이자유이용권"/></th>
+                        <th colspan = "2">21,000</th>
+                        <th colspan = "2">
+                            <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="1" id = "child3" value=0>
+                        </th>
+                        <th><input type="checkbox" name="entrance2" value="어른자유이용권"/></th>
+                        <th colspan = "2">26,000</th>
+                        <th colspan = "2">
+                            <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="1" id = "adult3" value=0>
+                        </th>
+                        <th colspan = "3">입장+놀이자유</th>
+                    </tr>
+                    <tr>
+                        <th colspan = "3">연간이용권</th>
+                        <th><input type="checkbox" name="entrance1" value="어린이연간이용권"/></th>
+                        <th colspan = "2">70,000</th>
+                        <th colspan = "2">
+                            <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="1" id = "child4" value=0>
+                        </th>
+                        <th><input type="checkbox" name="entrance2" value="어른연간이용권"/></th>
+                        <th colspan = "2">90,000</th>
+                        <th colspan = "2">
+                            <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="1" id = "adult4" value=0>
+                        </th>
+                        <th colspan = "3">입장+놀이자유</th>
+                    </tr>
+                </tbody>
+            </table>
+            <p id="valueInput"></p>
+            </center>
+
+            <script>
+                const getValueInput = () =>{
+                    var nameInput = document.getElementById("name").value;
+                    var child1Input = document.getElementById("child1").value;
+                    var child2Input = document.getElementById("child2").value;
+                    var child3Input = document.getElementById("child3").value;
+                    var child4Input = document.getElementById("child4").value;
+                    var arr1 = [];
+                    arr1[0] = child1Input;
+                    arr1[1] = child2Input;
+                    arr1[2] = child3Input;
+                    arr1[3] = child4Input;
+
+                    var adult1Input = document.getElementById("adult1").value;
+                    var adult2Input = document.getElementById("adult2").value;
+                    var adult3Input = document.getElementById("adult3").value;
+                    var adult4Input = document.getElementById("adult4").value;
+                    var arr2 = [];
+                    arr2[0] = adult1Input;
+                    arr2[1] = adult2Input;
+                    arr2[2] = adult3Input;
+                    arr2[3] = adult4Input;
+
+                    var total = (child1Input*7000) + (child2Input*12000) + (child3Input*21000) + (child4Input*70000)
+                                + (adult1Input*10000) + (adult2Input*16000) + (adult3Input*26000) + (adult4Input*90000);
+
+                    var obj_length1 = document.getElementsByName("entrance1").length;
+                    var x = "";
+                    for (var i=0; i<obj_length1; i++) {
+                        if (document.getElementsByName("entrance1")[i].checked == true) {
+                            x += document.getElementsByName("entrance1")[i].value + " " + arr1[i] + "매 ";
+                        }
+                    }
+
+                    var obj_length2 = document.getElementsByName("entrance2").length;
+                    var y = "";
+                    for (var i=0; i<obj_length2; i++) {
+                        if (document.getElementsByName("entrance2")[i].checked == true) {
+                            y += document.getElementsByName("entrance2")[i].value + " " + arr2[i] + "매 ";
+                        }
+                    }
+                    document.getElementById("valueInput").innerHTML = nameInput + " 고객님 감사합니다.<br>" + x + "<br>" + y + "<br>" + "합계 " + total + "원 입니다."; 
+                }
+            </script>
+    </body>
