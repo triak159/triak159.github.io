@@ -1,0 +1,101 @@
+<html>
+
+<body>
+    <canvas id="draw-canavas" width="500" height="500" style=" border : 1px solid #000" onclick="canvasClick(event)"> </canvas>
+    <p id="demo"></p>
+</body>
+
+<script>
+    var canvas = document.getElementById("draw-canavas");
+    var context = canvas.getContext("2d");
+
+    // 마우스 위치 표시
+
+    // 마우스 위치 글씨 속성
+    function writeMessage(canvas, message) {
+      context.clearRect(0, 0, canvas.width, canvas.height); // 캔버스 초기화
+      context.font = '18pt Calibri';
+      context.fillStyle = 'black';
+      context.fillText(message, 10, 25); // 좌표 텍스트 위치
+    }
+
+    // 마우스 위치 받기
+    function getMousePos(canvas, evt) {
+      var rect = canvas.getBoundingClientRect();
+      return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+      };
+    }
+
+    // 움직일 때마다 좌표 표시
+    canvas.addEventListener('mousemove', function(evt) {
+      var mousePos = getMousePos(canvas, evt);
+      var message = '마우스 위치: ' + mousePos.x + ',' + mousePos.y;
+      writeMessage(canvas, message);
+    }, false);
+
+    // 마우스 클릭 위치
+
+    var x = 0; // 캔버스 클릭시 X위치 저장할 변수
+    var y = 0; // 캔버스 클릭시 Y위치 저장할 변수
+    function canvasClick(event) {
+        var x = event.offsetX;
+        var y = event.offsetY;
+        clickX = x;
+        clickY = y;
+        document.getElementById("demo").innerHTML = "클릭 : " + "X좌표: " + clickX + ", Y좌표: " + clickY;
+    }
+
+    // 사각형 그리기
+
+    context.lineWidth = 3; // 선 두께
+    context.strokeStyle = "black"; // 선 색
+
+    var drag = false; // 마우스 드래그 상태
+    var mouseIsDown = 0;
+
+    // 이벤트 목록
+    canvas.addEventListener("mousemove", function (me) {
+        mMove(me);}, false);
+    // 마우스가 움직일 때
+    canvas.addEventListener("mousedown", function (me) {
+        mDown(me);}, false);
+    // 마우스를 눌렀을 때
+    canvas.addEventListener("mouseup", function (me) {
+        mUp(me);}, false);
+    // 마우스를 땠을 때
+
+
+    function mMove(me) {
+        if (!drag){
+            return;
+        } // drag가 false일때 실행 종료
+        var nowX = me.offsetX;
+        //마우스를 움직일 때마다 X좌표를 nowX에 담음
+        var nowY = me.offsetY;
+        //마우스를 움직일 때마다 Y좌표를 nowY에 담음
+        canvasDraw(nowX, nowY);
+        // 사각형을 그림
+    }
+
+    function mDown(me) {
+        drag = true; //그림 그리는 상태로 변경
+        startX = me.offsetX;
+        startY = me.offsetY;
+    }
+
+    function mUp(me) {
+        drag = false; //마우스를 떼었을 때 그리기 중지
+        endX = me.offsetX;
+        endY = me.offsetY;
+    }
+
+    function canvasDraw(currentX, currentY) {
+        context.strokeRect(startX, startY, currentX - startX, currentY - startY); //시작점과 끝점의 좌표 정보로 사각형을 그려준다.
+    }
+
+</script>
+
+
+</html>
